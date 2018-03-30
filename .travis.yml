@@ -1,13 +1,11 @@
 language: node_js
+before_install:
+- openssl aes-256-cbc -k "$super_secret_password" -in se234.pem.enc -out se234.pem -d
+- sudo chmod 400 se234.pem
 install: true
 script: true
 after_success:
-- ls -l
-- scp -i "se234.pem" -r html/* ubuntu@54.255.174.42:/var/www/html/
-
-before_install:
-- openssl aes-256-cbc -k "$super_secret_password" -in se234.pem.enc -out se234.pem -d
-
+- scp -i "se234.pem" -r html/* ubuntu@34.208.44.70:/var/www/html/
 addons:
  ssh_known_hosts:
  - 34.208.44.70
